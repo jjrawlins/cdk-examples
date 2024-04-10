@@ -6,7 +6,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^20",
+      "version": "^18",
       "type": "build"
     },
     {
@@ -46,6 +46,10 @@
       "type": "build"
     },
     {
+      "name": "jest-cdk-snapshot",
+      "type": "build"
+    },
+    {
       "name": "jest-junit",
       "version": "^15",
       "type": "build"
@@ -67,8 +71,21 @@
       "type": "build"
     },
     {
+      "name": "@types/aws-lambda",
+      "type": "runtime"
+    },
+    {
+      "name": "@types/node",
+      "version": "^18",
+      "type": "runtime"
+    },
+    {
       "name": "aws-cdk-lib",
       "version": "^2.133.0",
+      "type": "runtime"
+    },
+    {
+      "name": "aws-lambda",
       "type": "runtime"
     },
     {

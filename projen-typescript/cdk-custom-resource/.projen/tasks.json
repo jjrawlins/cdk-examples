@@ -26,7 +26,30 @@
     },
     "bundle": {
       "name": "bundle",
-      "description": "Prepare assets"
+      "description": "Prepare assets",
+      "steps": [
+        {
+          "spawn": "bundle:lambdas/ExampleCustomResourceLambda.lambda"
+        }
+      ]
+    },
+    "bundle:lambdas/ExampleCustomResourceLambda.lambda": {
+      "name": "bundle:lambdas/ExampleCustomResourceLambda.lambda",
+      "description": "Create a JavaScript bundle from src/lambdas/ExampleCustomResourceLambda.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/lambdas/ExampleCustomResourceLambda.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/lambdas/ExampleCustomResourceLambda.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+        }
+      ]
+    },
+    "bundle:lambdas/ExampleCustomResourceLambda.lambda:watch": {
+      "name": "bundle:lambdas/ExampleCustomResourceLambda.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/lambdas/ExampleCustomResourceLambda.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/lambdas/ExampleCustomResourceLambda.lambda.ts --target=\"node18\" --platform=\"node\" --outfile=\"assets/lambdas/ExampleCustomResourceLambda.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+        }
+      ]
     },
     "clobber": {
       "name": "clobber",
@@ -211,13 +234,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,jest-cdk-snapshot,projen,ts-jest,ts-node,typescript,@types/aws-lambda,aws-lambda"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript aws-cdk-lib constructs"
+          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-cdk-snapshot jest-junit projen ts-jest ts-node typescript @types/aws-lambda aws-cdk-lib aws-lambda constructs"
         },
         {
           "exec": "npx projen"

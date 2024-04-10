@@ -148,6 +148,7 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
+          "src/lambdas/ExampleCustomResourceLambda.lambda.ts",
           ".projenrc.ts",
           "projenrc/**/*.ts"
         ],
